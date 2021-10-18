@@ -8,6 +8,7 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
+    <script language="JavaScript" type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
@@ -39,13 +40,43 @@
 <!--							placeholder="Filter by name"-->
 <!--							/>-->
 <!--            </div>-->
-
+            <div>
+                <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+                <label for="openSidebarMenu" class="sidebarIconToggle">
+                    <div class="spinner diagonal part-1"></div>
+                    <div class="spinner horizontal"></div>
+                    <div class="spinner diagonal part-2"></div>
+                </label>
+                <div id="sidebarMenu">
+                    <ul class="sidebarMenuInner">
+                      <li>Team 11 <span>Web Developer</span></li>
+                      <li><button class="add">Add Test</button></li>
+                        <div>
+                          <ul id ="sidebarMenuInner"> 
+                              <div class="card">
+                                <!-- <img src="img_avatar.png" alt="Avatar" style="width:100%"> -->
+                                <div class="container">
+                                  <h4><b>Cafe and Restaurant</b></h4>
+                                  <p>Architect & Engineer</p>
+                                    <button class="remove" >Remove</button>
+                                </div>
+                              </div>
+                          </ul>
+                        </div>
+                      
+                    </ul>
+                </div>
+            </div>
         </nav>
 		
+        <script>
+            removeCard();
+            addCard();
+        </script>
 
         <article>
 
-            <div class="map-overlay">
+            <!-- <div class="map-overlay">
                 <fieldset>
                     <input
                             id="feature-filter"
@@ -54,7 +85,7 @@
                     />
                 </fieldset>
                 <div id="feature-listing" class="listing"></div>
-            </div>
+            </div> -->
             <div id="map"></div>
         </article>
     </section>
@@ -70,170 +101,170 @@
         <script type="text/javascript">//<![CDATA[
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibmVybzE5OTMxMjMiLCJhIjoiY2tlbm45ODl1MDNldjJxbjF1OWVyajRvNSJ9.hUkY9KH4jbG-kRkHuAYjcg';
-var layerNames = [];
-var layerIDs = [];
-var filterInput = document.getElementById('filter-input');
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/nero1993123/ckgd87vl51fyf19qj5edyhuvs',
-  center: [144.96, -37.81],
-  zoom: 13
-});
+// mapboxgl.accessToken = 'pk.eyJ1IjoibmVybzE5OTMxMjMiLCJhIjoiY2tlbm45ODl1MDNldjJxbjF1OWVyajRvNSJ9.hUkY9KH4jbG-kRkHuAYjcg';
+// var layerNames = [];
+// var layerIDs = [];
+// var filterInput = document.getElementById('filter-input');
+// var map = new mapboxgl.Map({
+//   container: 'map',
+//   style: 'mapbox://styles/nero1993123/ckgd87vl51fyf19qj5edyhuvs',
+//   center: [144.96, -37.81],
+//   zoom: 13
+// });
 
-        // Holds visible airport features for filtering
-        var airports = [];
+//         // Holds visible airport features for filtering
+//         var airports = [];
 
-        // Create a popup, but don't add it to the map yet.
-        var popup = new mapboxgl.Popup({
-            closeButton: false
-        });
+//         // Create a popup, but don't add it to the map yet.
+//         var popup = new mapboxgl.Popup({
+//             closeButton: false
+//         });
 
-        var filterEl = document.getElementById('feature-filter');
-        var listingEl = document.getElementById('feature-listing');
+//         var filterEl = document.getElementById('feature-filter');
+//         var listingEl = document.getElementById('feature-listing');
 
-        function renderListings(features) {
-            var empty = document.createElement('p');
-// Clear any existing listings
-            listingEl.innerHTML = '';
-            if (features.length) {
-                features.forEach(function (feature) {
-                    var prop = feature.properties;
-                    var item = document.createElement('a');
-                    item.href = prop.wikipedia;
-                    item.target = '_blank';
-                    item.textContent = prop.Feature_Na;
-                    item.addEventListener('mouseover', function () {
-// Highlight corresponding feature on the map
-                        popup
-                            .setLngLat(feature.geometry.coordinates)
-                            .setText(
-                                feature.properties.Feature_Na
-                            )
-                            .addTo(map);
-                    });
-                    listingEl.appendChild(item);
-                });
-// Show the filter input
-                filterEl.parentNode.style.display = 'block';
-            } else if (features.length === 0 && filterEl.value !== '') {
-                empty.textContent = 'No results found';
-                listingEl.appendChild(empty);
-            } else {
-                empty.textContent = 'Drag the map to populate results';
-                listingEl.appendChild(empty);
+//         function renderListings(features) {
+//             var empty = document.createElement('p');
+// // Clear any existing listings
+//             listingEl.innerHTML = '';
+//             if (features.length) {
+//                 features.forEach(function (feature) {
+//                     var prop = feature.properties;
+//                     var item = document.createElement('a');
+//                     item.href = prop.wikipedia;
+//                     item.target = '_blank';
+//                     item.textContent = prop.Feature_Na;
+//                     item.addEventListener('mouseover', function () {
+// // Highlight corresponding feature on the map
+//                         popup
+//                             .setLngLat(feature.geometry.coordinates)
+//                             .setText(
+//                                 feature.properties.Feature_Na
+//                             )
+//                             .addTo(map);
+//                     });
+//                     listingEl.appendChild(item);
+//                 });
+// // Show the filter input
+//                 filterEl.parentNode.style.display = 'block';
+//             } else if (features.length === 0 && filterEl.value !== '') {
+//                 empty.textContent = 'No results found';
+//                 listingEl.appendChild(empty);
+//             } else {
+//                 empty.textContent = 'Drag the map to populate results';
+//                 listingEl.appendChild(empty);
 
-// Hide the filter input
-                filterEl.parentNode.style.display = 'none';
+// // Hide the filter input
+//                 filterEl.parentNode.style.display = 'none';
 
-// remove features filter
-                map.setFilter('POI', ['has', 'Feature_Na']);
-            }
-        }
+// // remove features filter
+//                 map.setFilter('POI', ['has', 'Feature_Na']);
+//             }
+//         }
 
-        function normalize(string) {
-            return string.trim().toLowerCase();
-        }
+//         function normalize(string) {
+//             return string.trim().toLowerCase();
+//         }
 
-        function getUniqueFeatures(array, comparatorProperty) {
-            var existingFeatureKeys = {};
-// Because features come from tiled vector data, feature geometries may be split
-// or duplicated across tile boundaries and, as a result, features may appear
-// multiple times in query results.
-            var uniqueFeatures = array.filter(function (el) {
-                if (existingFeatureKeys[el.properties[comparatorProperty]]) {
-                    return false;
-                } else {
-                    existingFeatureKeys[el.properties[comparatorProperty]] = true;
-                    return true;
-                }
-            });
+//         function getUniqueFeatures(array, comparatorProperty) {
+//             var existingFeatureKeys = {};
+// // Because features come from tiled vector data, feature geometries may be split
+// // or duplicated across tile boundaries and, as a result, features may appear
+// // multiple times in query results.
+//             var uniqueFeatures = array.filter(function (el) {
+//                 if (existingFeatureKeys[el.properties[comparatorProperty]]) {
+//                     return false;
+//                 } else {
+//                     existingFeatureKeys[el.properties[comparatorProperty]] = true;
+//                     return true;
+//                 }
+//             });
 
-            return uniqueFeatures;
-        }
+//             return uniqueFeatures;
+//         }
 		
-map.on('load', function() {
+// map.on('load', function() {
 
 
-    map.on('moveend', function () {
-        var features = map.queryRenderedFeatures({ layers: ['POI'] });
-        if (features) {
-            // var uniqueFeatures = getUniqueFeatures(features, 'iata_code');
-// Populate features for the listing overlay.
-            renderListings(features);
+//     map.on('moveend', function () {
+//         var features = map.queryRenderedFeatures({ layers: ['POI'] });
+//         if (features) {
+//             // var uniqueFeatures = getUniqueFeatures(features, 'iata_code');
+// // Populate features for the listing overlay.
+//             renderListings(features);
 
-// Clear the input container
-            filterEl.value = '';
+// // Clear the input container
+//             filterEl.value = '';
 
-// Store the current features in sn `airports` variable to
-// later use for filtering on `keyup`.
-            airports = features;
-        }
-    });
+// // Store the current features in sn `airports` variable to
+// // later use for filtering on `keyup`.
+//             airports = features;
+//         }
+//     });
 
-    map.on('mousemove', 'POI', function (e) {
-// Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = 'pointer';
+//     map.on('mousemove', 'POI', function (e) {
+// // Change the cursor style as a UI indicator.
+//         map.getCanvas().style.cursor = 'pointer';
 
-// Populate the popup and set its coordinates based on the feature.
-        var feature = e.features[0];
-        // popup
-        //     .setLngLat(feature.geometry.coordinates)
-        //     .setText(
-        //         feature.properties.Feature_Na
-        //     )
-        //     .addTo(map);
-    });
+// // Populate the popup and set its coordinates based on the feature.
+//         var feature = e.features[0];
+//         // popup
+//         //     .setLngLat(feature.geometry.coordinates)
+//         //     .setText(
+//         //         feature.properties.Feature_Na
+//         //     )
+//         //     .addTo(map);
+//     });
 
-    map.on('mouseleave', 'POI', function () {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-    });
+//     map.on('mouseleave', 'POI', function () {
+//         map.getCanvas().style.cursor = '';
+//         popup.remove();
+//     });
 
-    filterEl.addEventListener('keyup', function (e) {
-        var value = normalize(e.target.value);
-// Filter visible features that don't match the input value.
-        var filtered = airports.filter(function (feature) {
+//     filterEl.addEventListener('keyup', function (e) {
+//         var value = normalize(e.target.value);
+// // Filter visible features that don't match the input value.
+//         var filtered = airports.filter(function (feature) {
 
-            var name = normalize(feature.properties.Feature_Na);
-            return name.indexOf(value) > -1;
-        });
+//             var name = normalize(feature.properties.Feature_Na);
+//             return name.indexOf(value) > -1;
+//         });
 
-// Populate the sidebar with filtered results
-        renderListings(filtered);
+// // Populate the sidebar with filtered results
+//         renderListings(filtered);
 
-// Set the filter to populate features into the layer.
-        if (filtered.length) {
-            map.setFilter('POI', [
-                'match',
-                ['get', 'Feature_Na'],
-                filtered.map(function (feature) {
-                    return feature.properties.Feature_Na;
-                }),
-                true,
-                false
-            ]);
-        }
-    });
+// // Set the filter to populate features into the layer.
+//         if (filtered.length) {
+//             map.setFilter('POI', [
+//                 'match',
+//                 ['get', 'Feature_Na'],
+//                 filtered.map(function (feature) {
+//                     return feature.properties.Feature_Na;
+//                 }),
+//                 true,
+//                 false
+//             ]);
+//         }
+//     });
 
-// Call this function on initialization
-// passing an empty array to render an empty state
-    renderListings([]);
+// // Call this function on initialization
+// // passing an empty array to render an empty state
+//     renderListings([]);
 	
-	var POI_info = map.queryRenderedFeatures({ layers: ['POI'] });
-	// alert(JSON.stringify(POI_info,null,4))
+// 	var POI_info = map.queryRenderedFeatures({ layers: ['POI'] });
+// 	// alert(JSON.stringify(POI_info,null,4))
 
 
 		
-	});
+// 	});
 	
 
 
-//});
+// //});
 			
 
 
-    </script>
+//     </script>
 
 </body>
 
