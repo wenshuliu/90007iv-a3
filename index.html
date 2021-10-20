@@ -98,7 +98,6 @@
                 });
               
                 map.on('click', 'cafes-and-restaurants', e => {
-                  console.log(e.features[0].properties);
                   new mapboxgl.Popup()
                   .setLngLat(e.lngLat)
                   .setHTML('<span class="popup-address">' + e.features[0].properties.trading_name + '<br>Address: ' + e.features[0].properties.street_address +'</span><br>' + 
