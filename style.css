@@ -353,3 +353,9 @@ img {
   cursor: pointer;
 }
 /* Travel card layout end */
+
+/* Navigation part*/
+.navigation {
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+/*Navigation end*/
