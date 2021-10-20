@@ -152,10 +152,10 @@ width: 180px;
 
 #map {
 
-  left: 25%;
+  left: 0%;
   top: 0;
   bottom: 0;
-  width: 75%;
+  width: 100%;
 }
 .map-overlay {
 
@@ -351,6 +351,7 @@ img {
 .container {
   padding: 20px;
   cursor: pointer;
+  text-transform: none;
 }
 /* Travel card layout end */
 
@@ -359,3 +360,13 @@ img {
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 /*Navigation end*/
+
+/* Popup window layout */
+.mapboxgl-popup {
+  max-width: 200px;
+}
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+/* Popup window end*/

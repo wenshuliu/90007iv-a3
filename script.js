@@ -8,20 +8,21 @@ function removeCard(){
     }
 }
 
-function addCard(){
+function addCard(properties, type){
     var els = document.getElementsByClassName("add");
     for(var i = 0; i<els.length;i++){
         els[i].addEventListener('click',function(e){
             block_to_insert = document.createElement( 'div' );
-            block_to_insert.innerHTML = 
-            '<div class="card">'+
-                '<div class="container">'+
-                '<h4><b>John Doe</b></h4>'+
-                '<p>Architect & Engineer</p>'+
-                '<button class="remove" >Remove</button>'+
-                '</div>'+
-            '</div>'
-
+            if(type == "cafe"){
+                block_to_insert.innerHTML = 
+                '<div class="card">'+
+                    '<div class="container">'+
+                    '<h4><b>'+ properties.trading_name +'</b></h4>'+
+                    '<p>Address: '+ properties.street_address +'</p>'+
+                    '<button class="remove" >Remove</button>'+
+                    '</div>'+
+                '</div>'
+            }
             document.getElementById('sidebarMenuInner').appendChild(block_to_insert)
 
             removeCard()

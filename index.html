@@ -19,7 +19,15 @@
 
     <section>
         <nav>
-            <a href="#cafes">Cafes & Restuarants</a>
+            <div class="dropdown">
+                <button class="dropbtn">Cafes & Restuarants & Liquor
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Cafes & Restuarants</a>
+                    <a href="#">Liquor Retailling</a>
+                </div>
+            </div>
             <a href="#bars">Bars & Pubs</a>
             <a href="#navigations">Navigation</a>
             <div class="dropdown">
@@ -31,7 +39,6 @@
                     <a href="#">Bus</a>
                     <a href="#">Bicycle</a>
                 </div>
-				
             </div>
 <!--			<div class="filter-ctrl">-->
 <!--					<input-->
@@ -54,14 +61,7 @@
                       <li><button class="add">Add Test</button></li>
                         <div>
                           <ul id ="sidebarMenuInner"> 
-                              <div class="card">
-                                <!-- <img src="img_avatar.png" alt="Avatar" style="width:100%"> -->
-                                <div class="container">
-                                  <h4><b>Cafe and Restaurant</b></h4>
-                                  <p>Architect & Engineer</p>
-                                    <button class="remove" >Remove</button>
-                                </div>
-                              </div>
+
                           </ul>
                         </div>
                       
@@ -88,6 +88,27 @@
                 <div id="feature-listing" class="listing"></div>
             </div> -->
             <div id="map"></div>
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoiamVmZnJleTY2NjY2NiIsImEiOiJja3N3NnJ3ODAxdzVzMndvM3Z0cHplem02In0.9ttA1DXJ9f-c9Vi15QDnWw'; 
+                var map = new mapboxgl.Map({
+                  container: 'map',
+                  style: 'mapbox://styles/jeffrey666666/ckur5hu3pcylx18msaarkruun',
+                  center:[144.966748, -37.823716],
+                  zoom:14.5
+                });
+              
+                map.on('click', 'cafes-and-restaurants', e => {
+                  console.log(e.features[0].properties);
+                  new mapboxgl.Popup()
+                  .setLngLat(e.lngLat)
+                  .setHTML('<span class="popup-address">' + e.features[0].properties.trading_name + '<br>Address: ' + e.features[0].properties.street_address +'</span><br>' + 
+                    '<br>Number of Seats: '+e.features[0].properties.number_of_seats + ' <br>Seating type: ' + e.features[0].properties.seating_type + 
+                    '<br><button class="add">Add Test</button>')
+                  .addTo(map);
+                  addCard(e.features[0].properties,"cafe");
+                });
+                
+              </script>
         </article>
     </section>
     
