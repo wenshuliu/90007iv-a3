@@ -17,4 +17,4 @@ if(type == "cafe"){
                 '</div>'
             }
 ```  
-**注：可以考虑在card里存一个coordinate,但不显示，为后续做新的功能做准备
+**注：可以考虑在card里存一个coordinate,但不显示，为后续做新的功能做准备**
