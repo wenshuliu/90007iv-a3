@@ -17,10 +17,11 @@ function addCard(properties, type){
                 block_to_insert.innerHTML = 
                 '<div class="card">'+
                     '<div class="container">'+
-                    '<h4><b>'+ properties.trading_name +'</b></h4>'+
-                    '<p>Address: '+ properties.street_address +'</p>'+
+                    '<h4><b>'+ properties["Trading name"] +'</b></h4>'+
+                    '<p>Address: '+ properties["Street address"] +'</p>'+
                     '<button class="remove" >Remove</button>'+
                     '</div>'+
+                    '<div class="coordinates" style="visibility:hidden">'+ properties.longitude + properties.latitude +'</div>'
                 '</div>'
             }
             document.getElementById('sidebarMenuInner').appendChild(block_to_insert)
