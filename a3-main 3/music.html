@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Filter symbols by toggling a list</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <style>
+        html,body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        #map{
+            height: 100%;
+            width: 100%;
+        }
+		
+		.mapboxgl-popup {
+		   max-width: 250px;
+		}
+		.mapboxgl-popup-content {
+		   text-align: center;
+		   font-family: 'Arial', sans-serif;
+		}
+
+		.popup-address {
+		  color: navy;
+		  font-weight: bold;
+		}
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+    <script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoieXdtYW8iLCJhIjoiY2t1bXMzcW1zMmNrZzJ1cnU0MzRkYWEwZiJ9.opY9AJvPAkfDpdnRyujAwQ';
+		var map = new mapboxgl.Map({
+		  container: 'map',
+		  style: 'mapbox://styles/ywmao/ckur0imtcesx418rz20bba3n9/draft'
+		});
+
+		map.on('load', e => {
+
+		  map.on('click', 'live-music-venues-1imoel', e => {
+			console.log(e.features[0].properties);
+			new mapboxgl.Popup()
+			  // the code in step 3 below must go in here 
+			  .setLngLat(e.lngLat)
+			  .setHTML('<span class="popup-address">' + e.features[0].properties.venue_name + '</span><br>' + 'Address: ' + e.features[0].properties.venue_address + '<br>' + 'Website: ' + e.features[0].properties.website)
+
+			  .addTo(map);
+		  });
+		});
+
+    </script>
+
+
+
+</body>
+
+</html>

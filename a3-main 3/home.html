@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Filter symbols by toggling a list</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <style>
+        html,body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        #map{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiamVmZnJleTY2NjY2NiIsImEiOiJja3N3NnJ3ODAxdzVzMndvM3Z0cHplem02In0.9ttA1DXJ9f-c9Vi15QDnWw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/jeffrey666666/ckv3u99zp52b714s1kxpp8jbl',
+            center: [144.966748, -37.823716],
+            zoom: 14.5
+        });
+
+        map.on('click', 'cafes-and-restaurants', e => {
+                  new mapboxgl.Popup()
+                  .setLngLat(e.lngLat)
+                  .setHTML('<span class="popup-address">' + e.features[0].properties["Trading name"] + '<br>Address: ' + e.features[0].properties["Street address"] +'</span><br>' + 
+                    '<br>Number of Seats: '+e.features[0].properties["Number of seats"] + ' <br>Seating type: ' + 
+                    '<br><button class="add">Add to Travel Plan</button>')
+                  .addTo(map);
+                  addCard(e.features[0].properties,"cafe");
+                });
+
+        // map.on('load', () => {
+        //             map.setLayoutProperty('cafes-and-restaurants','visibility','none')
+        //         })
+
+    </script>
+
+
+<script>
+    // function changeVisibility(){
+    //     var visibility = map.getLayoutProperty('cafes-and-restaurants',"visibility")
+    //     map.setLayoutProperty('cafes-and-restaurants','visibility',visibility=="none"?'visible':'none')
+    // }
+</script>
+
+</body>
+
+</html>
