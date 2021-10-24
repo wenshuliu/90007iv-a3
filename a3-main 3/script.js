@@ -23,6 +23,7 @@ function addCard(properties, type){
     var els = document.getElementsByClassName("add");
     for(var i = 0; i<els.length;i++){
         els[i].addEventListener('click',function(e){
+            alert("test")
             block_to_insert = document.createElement( 'div' );
             if(type == "cafe"){
                 block_to_insert.innerHTML = 

@@ -7,6 +7,8 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script language="JavaScript" type="text/javascript" src="script.js"></script>
     <style>
         html,body {
             margin: 0;
@@ -28,7 +30,7 @@
         mapboxgl.accessToken = 'pk.eyJ1IjoiamVmZnJleTY2NjY2NiIsImEiOiJja3N3NnJ3ODAxdzVzMndvM3Z0cHplem02In0.9ttA1DXJ9f-c9Vi15QDnWw';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/jeffrey666666/ckv3u99zp52b714s1kxpp8jbl',
+            style: 'mapbox://styles/jeffrey666666/ckv4sn1c3192s15qfr6y9dfh0',
             center: [144.966748, -37.823716],
             zoom: 14.5
         });
@@ -37,7 +39,7 @@
                   new mapboxgl.Popup()
                   .setLngLat(e.lngLat)
                   .setHTML('<span class="popup-address">' + e.features[0].properties["Trading name"] + '<br>Address: ' + e.features[0].properties["Street address"] +'</span><br>' + 
-                    '<br>Number of Seats: '+e.features[0].properties["Number of seats"] + ' <br>Seating type: ' + 
+                    '<br>Number of Seats: '+e.features[0].properties["Number of seats"] + ' <br>' + 
                     '<br><button class="add">Add to Travel Plan</button>')
                   .addTo(map);
                   addCard(e.features[0].properties,"cafe");
