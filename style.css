@@ -370,3 +370,7 @@ img {
   font-family: 'Arial', sans-serif;
 }
 /* Popup window end*/
+
+.card.over{
+  border: 2px dashed #000;
+}

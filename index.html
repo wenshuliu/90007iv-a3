@@ -45,7 +45,6 @@
                 <div id="sidebarMenu">
                     <ul class="sidebarMenuInner">
                       <li> Travel Plan <span>Web Developer</span></li>
-                      <!-- <li><button class="add">Add Test</button></li> -->
                         <div>
                           <ul id ="sidebarMenuInner"> 
 
@@ -75,12 +74,11 @@
                 });
 
                 map.on('click', 'cafes-and-restaurants', e => {
-                    console.log(e.features[0].properties)
                   new mapboxgl.Popup()
                   .setLngLat(e.lngLat)
                   .setHTML('<span class="popup-address">' + e.features[0].properties["Trading name"] + '<br>Address: ' + e.features[0].properties["Street address"] +'</span><br>' + 
                     '<br>Number of Seats: '+e.features[0].properties["Number of seats"] + ' <br>Seating type: ' + e.features[0].properties["Seating type"] + 
-                    '<br><button class="add">Add Test</button>')
+                    '<br><button class="add">Add to Travel Plan</button>')
                   .addTo(map);
                   addCard(e.features[0].properties,"cafe");
                 });
