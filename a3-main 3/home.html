@@ -38,7 +38,7 @@
         map.on('click', 'cafes-and-restaurants', e => {
                   new mapboxgl.Popup()
                   .setLngLat(e.lngLat)
-                  .setHTML('<span class="popup-address">' + e.features[0].properties["Trading name"] + '<br>Address: ' + e.features[0].properties["Street address"] +'</span><br>' + 
+                  .setHTML('<span class="popup-address"><h4>' + e.features[0].properties["Trading name"] + '</h4><br>Address: ' + e.features[0].properties["Street address"] +'</span><br>' + 
                     '<br>Number of Seats: '+e.features[0].properties["Number of seats"] + ' <br>' + 
                     '<br><button class="add">Add to Travel Plan</button>')
                   .addTo(map);
