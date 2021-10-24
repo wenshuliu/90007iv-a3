@@ -60,6 +60,20 @@
 		  height: 10px;
 		  margin-right: 5px;
 		}
+		
+		.filter-group {
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+            border-radius: 3px;
+            /* width: 120px; */
+            /* color: #fff; */
+            padding: 10px;
+            background-color: #fff;
+        }
     </style>
 </head>
 
@@ -67,6 +81,17 @@
 
     <div id="map"></div>
 	<div class="map-overlay" id="legend"></div>
+	
+    <nav id="filter-group" class="filter-group">
+        <input type="checkbox" checked="true" onclick="changeMap(this)" data-name="College"><span>College</span></br>
+        <input type="checkbox" checked onclick="changeMap(this)" data-name="Bar"><span>Bar</span></br>
+        <input type="checkbox" checked onclick="changeMap(this)" data-name="Museum"><span>Museum</span></br>
+        <input type="checkbox" checked onclick="changeMap(this)" data-name="Theatre"><span>Theatre</span></br>
+
+
+    </nav>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	
     <script>
 		mapboxgl.accessToken = 'pk.eyJ1IjoieXdtYW8iLCJhIjoiY2t1bXMzcW1zMmNrZzJ1cnU0MzRkYWEwZiJ9.opY9AJvPAkfDpdnRyujAwQ';
 		var map = new mapboxgl.Map({
@@ -75,9 +100,12 @@
 		  center: [144.966748, -37.823716],
 		  zoom: 13
 		});
+		
+		//filter
+		const filterGroup = document.getElementById('filter-group');
 
 		map.on('load', e => {
-		  let layers = [{
+		  /*let layers = [{
 				"name": "Places to Watch Live Music",
 			  }];
 			  let legend = document.querySelector('#legend');
@@ -95,17 +123,58 @@
 				item.appendChild(key);
 				item.appendChild(value);
 				legend.appendChild(item);
-			  }
+			  }*/
+		    var layers= ["College","Bar", "Museum", "Theatre"]
+            let showInfo = null;
+            layers.map(function(item){
+                map.on('click',item, function (e) {
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: [item],
+                });
+                if (features.length > 0) {
+                    let pop = features[0].properties
+                    var coordinates = e.features[0].geometry.coordinates;//图片的经纬度
+                    /*showInfo = '<div class="makerTop"><h2 class="markerHear" > '+pop.Feature_Na+' </h2></div>' +
+                        '<div class="markerBody" ><p>Sub_Theme:'+pop.Sub_Theme+'</p></div >'*/
+					showInfo = '<span class="popup-address">' + e.features[0].properties.venue_name + '</span><br>' + 'Address: ' + e.features[0].properties.venue_address + '<br>' + 'Website: ' + e.features[0].properties.website
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(showInfo)
+                        .addTo(map);
+                }
+            })
+          })
+		  
 
-		  map.on('click', 'live-music-venues-1imoel', e => {
+		  /*map.on('click', 'live-music-venues-1imoel', e => {
 			console.log(e.features[0].properties);
 			new mapboxgl.Popup()
 			  .setLngLat(e.lngLat)
 			  .setHTML('<span class="popup-address">' + e.features[0].properties.venue_name + '</span><br>' + 'Address: ' + e.features[0].properties.venue_address + '<br>' + 'Website: ' + e.features[0].properties.website)
 
 			  .addTo(map);
-		  });
+		  });*/
+		  
+		  /*map.on('click', 'Bar', e => {
+			console.log(e.features[0].properties);
+			new mapboxgl.Popup()
+			  .setLngLat(e.lngLat)
+			  .setHTML('<span class="popup-address">' + e.features[0].properties.venue_name + '</span><br>' + 'Address: ' + e.features[0].properties.venue_address + '<br>' + 'Website: ' + e.features[0].properties.website)
+
+			  .addTo(map);
+		  });*/
+		  
+		  
 		});
+		
+		//change map
+		function changeMap(dom) {
+            map.setLayoutProperty(
+                $(dom).attr('data-name'),
+                'visibility',
+                $(dom).prop("checked") ? 'visible' : 'none'
+            )
+        }
 
     </script>
 
