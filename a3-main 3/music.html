@@ -96,7 +96,7 @@
 		mapboxgl.accessToken = 'pk.eyJ1IjoieXdtYW8iLCJhIjoiY2t1bXMzcW1zMmNrZzJ1cnU0MzRkYWEwZiJ9.opY9AJvPAkfDpdnRyujAwQ';
 		var map = new mapboxgl.Map({
 		  container: 'map',
-		  style: 'mapbox://styles/ywmao/ckur0imtcesx418rz20bba3n9/draft',
+		  style: 'mapbox://styles/ywmao/ckur0imtcesx418rz20bba3n9',
 		  center: [144.966748, -37.823716],
 		  zoom: 13
 		});
@@ -105,12 +105,12 @@
 		const filterGroup = document.getElementById('filter-group');
 
 		map.on('load', e => {
-		  /*let layers = [{
+		  let layers1 = [{
 				"name": "Places to Watch Live Music",
 			  }];
 			  let legend = document.querySelector('#legend');
 
-			  for (let layer of layers) {
+			  for (let layer of layers1) {
 				let item = document.createElement('div');
 
 				let key = document.createElement('span');
@@ -123,7 +123,7 @@
 				item.appendChild(key);
 				item.appendChild(value);
 				legend.appendChild(item);
-			  }*/
+			  }
 		    var layers= ["College","Bar", "Museum", "Theatre"]
             let showInfo = null;
             layers.map(function(item){
@@ -137,7 +137,9 @@
                     /*showInfo = '<div class="makerTop"><h2 class="markerHear" > '+pop.Feature_Na+' </h2></div>' +
                         '<div class="markerBody" ><p>Sub_Theme:'+pop.Sub_Theme+'</p></div >'*/
 					showInfo = '<span class="popup-address">' + e.features[0].properties.venue_name + '</span><br>' + 'Address: ' + e.features[0].properties.venue_address + '<br>' + 'Website: ' + e.features[0].properties.website
-                    new mapboxgl.Popup()
+                    //showInfo = e.features[0].properties.venue_name + '</span><br>' + 'Address: ' + e.features[0].properties.venue_address + '<br>' + 'Website: ' + e.features[0].properties.website
+
+					new mapboxgl.Popup()
                         .setLngLat(coordinates)
                         .setHTML(showInfo)
                         .addTo(map);
